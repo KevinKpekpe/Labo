@@ -2,7 +2,7 @@
 <nav class="navbar clearHeader">
 
     <div class="col-12">
-        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="index.html">Projet kpekpe</a> </div>
+        <div class="navbar-header"> <a href="javascript:void(0);" class="bars"></a> <a class="navbar-brand" href="index.html">Labo App</a> </div>
     </div>
 </nav>
 <section>
@@ -10,7 +10,7 @@
     <aside id="leftsidebar" class="sidebar">
 
         <div class="user-info">
-            <div class="admin-image"> <img src="" alt="img admin"> </div>
+            <div class="admin-image"> <img src="{{asset('images/'. Auth::user()->avatar)}}" alt="img admin"> </div>
             <div class="admin-action-info"> <span>Bienvenue !</span>
                 <h3>
                     @auth
