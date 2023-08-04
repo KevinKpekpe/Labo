@@ -57,8 +57,8 @@
                 </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Gestion des Patients</span> </a>
                     <ul class="ml-menu">
-                        <li><a href="patients.html">tout les patients</a></li>
-                        <li><a href="ajouter-patient.html">Ajouter un paient</a></li>
+                        <li><a href="{{route('admin.patients.index')}}">tout les patients</a></li>
+                        <li><a href="{{route('admin.patients.create')}}">Ajouter un paient</a></li>
                     </ul>
                 </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Gestion des Examens</span> </a>
@@ -75,6 +75,9 @@
                         <li> <a href="404.html">Page 404</a> </li>
                         <li> <a href="500.html">Page 500</a> </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="{{route('logout')}}" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Deconnexion</span> </a>
                 </li>
 
             </ul>
