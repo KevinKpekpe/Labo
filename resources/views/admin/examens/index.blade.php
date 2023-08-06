@@ -11,7 +11,9 @@
                     {{ session('success') }}
                 </div>
             @endif
+
             <div class="row clearfix">
+                <a href="{{route('admin.examens.create')}}" class="btn btn-success mb-2">Créer un Examen</a>
                 <table class="table  table-striped">
                     <thead class="thead-dark">
                         <tr>

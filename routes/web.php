@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DocteurController as AdminDocteurController;
 use App\Http\Controllers\Admin\ExamenController;
 use App\Http\Controllers\Admin\PatientController;
+use App\Http\Controllers\Admin\SecretaireController as AdminSecretaireController;
 use App\Http\Controllers\Auth\AuthConroller;
+use App\Http\Controllers\DocteurController;
 use App\Http\Controllers\SecretaireController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -37,16 +40,20 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/login',[AuthConroller::class,'login'])->name('login');
-Route::post('/login',[AuthConroller::class,'dologin']);
+Route::get('/login',[AuthConroller::class,'login'])->name('login')->middleware('guest');
+Route::post('/login',[AuthConroller::class,'dologin'])->middleware('guest');
 Route::get('/logout',[AuthConroller::class,'logout'])->name('logout')->middleware('auth');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'roleControl'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('home');
     Route::resource('patients',PatientController::class);
     Route::resource('examens',ExamenController::class);
+    Route::resource('secretaires',AdminSecretaireController::class);
+    Route::resource('docteurs',AdminDocteurController::class);
 });
 Route::prefix('secretaire')->name('secretaire.')->middleware(['auth', 'roleControl'])->group(function () {
     Route::get('/', [SecretaireController::class, 'index'])->name('home');
 });
-
+Route::prefix('docteur')->name('docteur.')->middleware(['auth', 'roleControl'])->group(function () {
+    Route::get('/', [DocteurController::class, 'index'])->name('home');
+});

@@ -33,7 +33,7 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">NAVIGATION PRINCIPALE</li>
-                <li class="active open"><a href="{{route('home')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+                <li class="active open"><a href="{{route('admin.home')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Rendez-vous</span> </a>
                     <ul class="ml-menu">
                         <li><a href="rendezvous.html">Prendre Rendez-vous</a></li>
@@ -43,14 +43,14 @@
                     <ul class="ml-menu">
                         <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Docteur</span> </a>
                             <ul class="ml-menu">
-                                <li><a href="">Liste de Docteurs</a></li>
-                                <li><a href="">Ajouter un Docteur</a></li>
+                                <li><a href="{{route('admin.docteurs.index')}}">Liste de Docteurs</a></li>
+                                <li><a href="{{route('admin.docteurs.create')}}">Ajouter un Docteur</a></li>
                             </ul>
                         </li>
                         <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Secretaire</span></a>
                             <ul class="ml-menu">
-                                <li><a href="">Liste de Secretaire</a></li>
-                                <li><a href="">Ajouter un Secretaire</a></li>
+                                <li><a href="{{route('admin.secretaires.index')}}">Liste de Secretaire</a></li>
+                                <li><a href="{{route('admin.secretaires.create')}}">Ajouter un Secretaire</a></li>
                             </ul>
                         </li>
                     </ul>

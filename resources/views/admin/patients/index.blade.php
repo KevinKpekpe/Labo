@@ -12,6 +12,7 @@
                 </div>
             @endif
             <div class="row clearfix">
+                <a href="{{route('admin.patients.create')}}" class="btn btn-success mb-2">Ajouter un Patient</a>
                 <table class="table  table-striped">
                     <thead class="thead-dark">
                         <tr>

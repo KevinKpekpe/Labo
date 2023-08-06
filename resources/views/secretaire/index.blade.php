@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base')
 @section('content')
 <section class="content home">
     <div class="container-fluid">
@@ -12,8 +12,8 @@
                 <div class="info-box-4 hover-zoom-effect">
                     <div class="icon"> <i class="zmdi zmdi-account col-blue"></i> </div>
                     <div class="content">
-                        <div class="text">Nombre de Patients</div>
-                        <div class="number">{{$patientsCount}}</div>
+                        <div class="text">Nouveau patients</div>
+                        <div class="number">27</div>
                     </div>
                 </div>
             </div>
@@ -21,8 +21,8 @@
                 <div class="info-box-4 hover-zoom-effect">
                     <div class="icon"> <i class="zmdi zmdi-account col-green"></i> </div>
                     <div class="content">
-                        <div class="text">Examen Disponible</div>
-                        <div class="number">{{$examCount}}</div>
+                        <div class="text">Patients guéries</div>
+                        <div class="number">12</div>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@
         <div class="user-info">
             <div class="admin-image"> <img src="
             @auth
-            {{asset('images/'. Auth::user()->avatar)}}
+            {{asset('/storage/'. Auth::user()->avatar)}}
             @endauth
             @auth
 
