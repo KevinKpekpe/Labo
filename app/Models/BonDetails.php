@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Docteur extends Model
+class BonDetails extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-    public function bonlabos()
+    public function bonlabo()
     {
-        return $this->hasMany(BonLabo::class);
+        return $this->belongsTo(BonLabo::class);
+    }
+
+    public function examen()
+    {
+        return $this->belongsTo(Examen::class);
     }
 }

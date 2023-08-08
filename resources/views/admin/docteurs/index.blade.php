@@ -12,7 +12,7 @@
                 </div>
             @endif
             <div class="row clearfix">
-                <a href="{{route('admin.docteurs.create')}}" class="btn btn-success mb-2">Ajouter un docteur</a>
+                <a href="{{ route('admin.docteurs.create') }}" class="btn btn-success mb-2">Ajouter un docteur</a>
                 <table class="table  table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -24,13 +24,17 @@
                             <th>Date</th>
                             <th>telephone</th>
                             <th>Email</th>
+                            <th>Specialite</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($docteurs as $docteur)
+                        @forelse ($docteurs as $key => $docteur)
+                            @php
+                                $key += 1;
+                            @endphp
                             <tr>
-                                <td scope="row">{{ $docteur->id }}</td>
+                                <td scope="row">{{ $key }}</td>
                                 <td scope="row">{{ $docteur->name }}</td>
                                 <td scope="row">{{ $docteur->postnom }}</td>
                                 <td scope="row">{{ $docteur->prenom }}</td>
@@ -38,6 +42,7 @@
                                 <td scope="row">{{ $docteur->date_de_naissance }}</td>
                                 <td scope="row">{{ $docteur->telephone }}</td>
                                 <td scope="row">{{ $docteur->email }}</td>
+                                <td scope="row">{{ $docteur->docteur->specialite }}</td>
                                 <td>
                                     <a href="{{ route('admin.docteurs.edit', ['docteur' => $docteur->id]) }}"
                                         class="btn btn-warning">Edit</a>

@@ -18,12 +18,10 @@ class DocteurController extends Controller
     }
     public function create()
     {
-        return view('admin.docteurs.form', ['docteur' => new User()]);
+        return view('admin.docteurs.form', ['docteur' => new User(), 'tb_docteur' => new Docteur()]);
     }
     public function store(UserDocteurFormRequest $request)
     {
-        //dd($request->validated());
-        // Les données ont été validées, vous pouvez les utiliser pour créer un nouvel utilisateur
         $user = User::create([
             'name' => $request->input('name'),
             'matricule' => $request->input('matricule'),
@@ -31,91 +29,65 @@ class DocteurController extends Controller
             'prenom' => $request->input('prenom'),
             'adresse' => $request->input('adresse'),
             'telephone' => $request->input('telephone'),
-            'sexe' => $request->input('sexe', 'M'), // Par défaut, 'M' si le champ est vide
+            'sexe' => $request->input('sexe', 'M'),
             'date_de_naissance' => $request->input('date_de_naissance'),
-            'role' => 'docteur', // Rôle par défaut "docteur"
+            'role' => 'docteur',
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
         ]);
-
-        // Gérer le téléchargement de l'avatar s'il est présent
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $avatarPath = $avatar->store('avatars', 'public');
             $user->avatar = $avatarPath;
             $user->save();
         }
-
-        // Ajouter l'utilisateur à la table "docteurs"
         $docteur = Docteur::create([
             'cnom' => $request->input('cnom'),
             'user_id' => $user->id,
             'specialite' => $request->input('specialite'),
         ]);
-
-        // Retourner une réponse ou rediriger l'utilisateur
-
-        // Exemple de redirection vers une route nommée "home"
-        return redirect()->route('admin.docteurs.index');
+        return redirect()->route('admin.docteurs.index')->with('success','Insertion Successfully');
     }
     public function edit(User $docteur)
     {
-        return view('admin.docteurs.form', ['docteur' => $docteur]);
+        $tb_docteur = $docteur->docteur;
+        return view('admin.docteurs.form', ['docteur' => $docteur, 'tb_docteur' => $tb_docteur]);
     }
-    public function update(UserFormRequest $request, User $docteur)
+    public function update(UserDocteurFormRequest $request, User $docteur)
     {
-
-        // Les données ont été validées, vous pouvez les utiliser pour mettre à jour l'utilisateur existant
-        $data = [
+        //dd($request->validated());
+        $docteur->update([
             'name' => $request->input('name'),
             'matricule' => $request->input('matricule'),
             'postnom' => $request->input('postnom'),
             'prenom' => $request->input('prenom'),
             'adresse' => $request->input('adresse'),
             'telephone' => $request->input('telephone'),
-            'sexe' => $request->input('sexe', 'M'), // Par défaut, 'M' si le champ est vide
+            'sexe' => $request->input('sexe', 'M'),
             'date_de_naissance' => $request->input('date_de_naissance'),
-            'role' => 'docteur', // Rôle par défaut "docteur"
+            'role' => 'docteur',
             'email' => $request->input('email'),
-        ];
-
-        if ($request->filled('password')) {
-            $data['password'] = bcrypt($request->input('password'));
+            'password' => bcrypt($request->input('password')),
+        ]);
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public');
+            $docteur->avatar = $avatarPath;
+            $docteur->save();
         }
+        $docteurData = $request->only([
+            'cnom', 'specialite'
+        ]);
 
-        // Gérer le téléchargement de la nouvelle photo de profil
-    if ($request->hasFile('avatar')) {
-        $avatar = $request->file('avatar');
-        $avatarPath = $avatar->store('avatars', 'public');
-        $data['avatar'] = $avatarPath;
-
-        // Supprimer l'ancienne photo de profil de l'utilisateur s'il en a une
-        if ($docteur->avatar) {
-            Storage::disk('public')->delete($docteur->avatar);
-        }
-    }
-        //dd($data);
-        $docteur->update($data);
-
-        // Retourner une réponse ou rediriger l'utilisateur
-
-        // Exemple de redirection vers une route nommée "home"
-        return redirect()->route('admin.docteurs.index');
+        $docteur->docteur()->update($docteurData);
+        return redirect()->route('admin.docteurs.index')->with('success','Modified Successfully');
     }
     public function destroy(User $docteur)
     {
-        //dd($docteur);
-        // Supprimer la photo de l'utilisateur s'il en a une
         if ($docteur->avatar) {
             Storage::disk('public')->delete($docteur->avatar);
         }
-
-        // Supprimer l'utilisateur de la base de données
         $docteur->delete();
-
-        // Retourner une réponse ou rediriger l'utilisateur
-
-        // Exemple de redirection vers une route nommée "home"
-        return redirect()->route('admin.docteurs.index');
+        return redirect()->route('admin.docteurs.index')->with('success','Suppression Successfully');
     }
 }

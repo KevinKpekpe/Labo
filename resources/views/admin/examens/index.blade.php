@@ -13,7 +13,7 @@
             @endif
 
             <div class="row clearfix">
-                <a href="{{route('admin.examens.create')}}" class="btn btn-success mb-2">Créer un Examen</a>
+                <a href="{{ route('admin.examens.create') }}" class="btn btn-success mb-2">Créer un Examen</a>
                 <table class="table  table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -24,9 +24,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($examens as $examen)
+                        @forelse ($examens as $key => $examen)
+                            @php
+                                $key += 1;
+                            @endphp
                             <tr>
-                                <td scope="row">{{ $examen->id }}</td>
+                                <td scope="row">{{ $key}}</td>
                                 <td scope="row">{{ $examen->description }}</td>
                                 <td scope="row">{{ $examen->note }}</td>
                                 <td>

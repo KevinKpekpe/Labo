@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BonLaboController;
+use App\Http\Controllers\Admin\BonLaboDetailsController;
 use App\Http\Controllers\Admin\DocteurController as AdminDocteurController;
 use App\Http\Controllers\Admin\ExamenController;
 use App\Http\Controllers\Admin\PatientController;
@@ -50,6 +52,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'roleControl'])->gro
     Route::resource('examens',ExamenController::class);
     Route::resource('secretaires',AdminSecretaireController::class);
     Route::resource('docteurs',AdminDocteurController::class);
+    Route::resource('bonlabos',BonLaboController::class);
+    Route::get('bonlabos/{bonlaboId}/results', [BonLaboDetailsController::class, 'edit'])->name('bonlabo-details.edit');
+    Route::post('bonlabos/{bonlaboId}/update-results', [BonLaboDetailsController::class, 'update'])->name('bonlabo-details.update');
 });
 Route::prefix('secretaire')->name('secretaire.')->middleware(['auth', 'roleControl'])->group(function () {
     Route::get('/', [SecretaireController::class, 'index'])->name('home');
@@ -57,3 +62,7 @@ Route::prefix('secretaire')->name('secretaire.')->middleware(['auth', 'roleContr
 Route::prefix('docteur')->name('docteur.')->middleware(['auth', 'roleControl'])->group(function () {
     Route::get('/', [DocteurController::class, 'index'])->name('home');
 });
+
+Route::get('/forgotPassword',function(){
+    return view ('auth.forgot-password');
+})->name('forgotPassword');

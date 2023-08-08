@@ -34,49 +34,25 @@
             <ul class="list">
                 <li class="header">NAVIGATION PRINCIPALE</li>
                 <li class="active open"><a href="{{route('home')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Rendez-vous</span> </a>
+                @if (Auth::user()->role == 'secretaire')
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Gestion des Patients</span> </a>
                     <ul class="ml-menu">
-                        <li><a href="rendezvous.html">Prendre Rendez-vous</a></li>
+                        <li><a href="">tout les Examens</a></li>
+                        <li><a href="">Ajouter un Examen</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Gestions des Utilisateurs</span> </a>
-                    <ul class="ml-menu">
-                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Docteur</span> </a>
-                            <ul class="ml-menu">
-                                <li><a href="">Liste de Docteurs</a></li>
-                                <li><a href="">Ajouter un Docteur</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Secretaire</span></a>
-                            <ul class="ml-menu">
-                                <li><a href="">Liste de Secretaire</a></li>
-                                <li><a href="">Ajouter un Secretaire</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                @endif
+                @if (Auth::user()->role == 'docteur')
+                    <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Gestion des Examens</span> </a>
+                        <ul class="ml-menu">
+                            <li><a href="{{route('admin.examens.index')}}">Les Patients</a></li>
+                            <li><a href="{{route('admin.examens.create')}}">Ajouter un Examen</a></li>
+                        </ul>
+                    </li>
+                @endif
+                <li>
+                    <a href="{{route('logout')}}" class="menu-toggle"><i class="zmdi zmdi-account"></i><span>Deconnexion</span> </a>
                 </li>
-                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Gestion des Patients</span> </a>
-                    <ul class="ml-menu">
-                        <li><a href="patients.html">tout les patients</a></li>
-                        <li><a href="ajouter-patient.html">Ajouter un paient</a></li>
-                    </ul>
-                </li>
-                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Gestion des Examens</span> </a>
-                    <ul class="ml-menu">
-                        <li><a href="{{route('admin.examens.index')}}">tout les Examens</a></li>
-                        <li><a href="{{route('admin.examens.create')}}">Ajouter un Examen</a></li>
-                    </ul>
-                </li>
-                <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-copy"></i><span>Pages utiles</span> </a>
-                    <ul class="ml-menu">
-                        <li> <a href="connexion.html">Connexion</a> </li>
-                        <li> <a href="enregistrement.html">Enregistrement</a> </li>
-                        <li> <a href="oublie.html">Mot de pass oublié</a> </li>
-                        <li> <a href="404.html">Page 404</a> </li>
-                        <li> <a href="500.html">Page 500</a> </li>
-                    </ul>
-                </li>
-
             </ul>
         </div>
 

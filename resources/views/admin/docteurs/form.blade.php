@@ -189,7 +189,7 @@
                                             <div class="form-line">
                                                 <input type="text" name="cnom"
                                                     class="form-control @error('cnom') is-invalid @enderror"
-                                                    placeholder="cnom du docteur" value="{{ old('cnom') }}">
+                                                    placeholder="cnom du docteur" value="{{ old('cnom',$tb_docteur->cnom) }}">
                                                 @error('cnom')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -202,7 +202,7 @@
                                                 <input type="text" name="specialite"
                                                     class="form-control @error('specialite') is-invalid @enderror"
                                                     placeholder="specialite"
-                                                    value="{{ old('specialite') }}">
+                                                    value="{{ old('specialite',$tb_docteur->specialite) }}">
                                                 @error('specialite')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

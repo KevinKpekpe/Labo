@@ -23,9 +23,6 @@
                     @auth
                     {{Auth::user()->name}}
                     @endauth
-                    @guest
-                    Dr. Kevine KPE
-                    @endguest
                 </h3>
             </div>
         </div>
@@ -34,11 +31,6 @@
             <ul class="list">
                 <li class="header">NAVIGATION PRINCIPALE</li>
                 <li class="active open"><a href="{{route('admin.home')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
-                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-calendar-check"></i><span>Rendez-vous</span> </a>
-                    <ul class="ml-menu">
-                        <li><a href="rendezvous.html">Prendre Rendez-vous</a></li>
-                    </ul>
-                </li>
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Gestions des Utilisateurs</span> </a>
                     <ul class="ml-menu">
                         <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Docteur</span> </a>
@@ -67,13 +59,10 @@
                         <li><a href="{{route('admin.examens.create')}}">Ajouter un Examen</a></li>
                     </ul>
                 </li>
-                <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-copy"></i><span>Pages utiles</span> </a>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-add"></i><span>Gestion des Bons</span> </a>
                     <ul class="ml-menu">
-                        <li> <a href="connexion.html">Connexion</a> </li>
-                        <li> <a href="enregistrement.html">Enregistrement</a> </li>
-                        <li> <a href="oublie.html">Mot de pass oublié</a> </li>
-                        <li> <a href="404.html">Page 404</a> </li>
-                        <li> <a href="500.html">Page 500</a> </li>
+                        <li><a href="{{route('admin.bonlabos.index')}}">Afficher Tous les Bons</a></li>
+                        <li><a href="{{route('admin.bonlabos.create')}}">Ajouter un Bon</a></li>
                     </ul>
                 </li>
                 <li>

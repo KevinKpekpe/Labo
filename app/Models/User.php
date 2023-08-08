@@ -50,7 +50,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function docteur(){
-        return $this->hasMany(Docteur::class);
+    public function docteur()
+    {
+        return $this->hasOne(Docteur::class);
     }
 }

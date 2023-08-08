@@ -10,3 +10,5 @@ class DocteurController extends Controller
         return view('docteur.index');
     }
 }
+
+

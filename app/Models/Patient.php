@@ -9,4 +9,8 @@ class Patient extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function bonlabos()
+    {
+        return $this->hasMany(BonLabo::class);
+    }
 }

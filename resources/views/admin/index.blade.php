@@ -31,7 +31,7 @@
                     <div class="icon"> <i class="zmdi zmdi-bug col-blush"></i> </div>
                     <div class="content">
                         <div class="text">opérations du jour</div>
-                        <div class="number">05</div>
+                        <div class="number">{{$bonDetailsCount}}</div>
                     </div>
                 </div>
             </div>

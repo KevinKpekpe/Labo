@@ -9,4 +9,8 @@ class Examen extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function bonDetails()
+    {
+        return $this->hasMany(BonDetails::class);
+    }
 }
