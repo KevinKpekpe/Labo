@@ -36,7 +36,7 @@
     <div class="overlay"></div>
 
     <div id="morphsearch" class="morphsearch">
-        <form class="morphsearch-form">
+        <form class="morphsearch-form" method="GET">
             <div class="form-group m-0">
                 <input value="" type="search" placeholder="Effectuer une recherche..." class="form-control morphsearch-input" />
                 <button class="morphsearch-submit" type="submit">Rechercher...</button>

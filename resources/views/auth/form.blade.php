@@ -19,6 +19,17 @@
     <div class="card">
         <h1 class="title"><span>KPEKPE project </span>Connexion <span class="msg">Authentifiez-vous pour commencer votre session</span></h1>
         <div class="body">
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">{{$error}}</div>
+                @endforeach
+            @endif
+            @if (session()->has('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+            @endif
+            @if (session()->has('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+            @endif
             <form method="POST" action="{{route('login')}}">
                 @csrf
                 <div class="input-group icon before_span">
@@ -41,7 +52,7 @@
                     <div class="text-center">
                         <input type="submit" class="btn btn-raised waves-effect g-bg-cyan" value="Connexion">
                     </div>
-                    <div class="text-center"> <a href="{{route('forgotPassword')}}">Mot de passe oublié ?</a></div>
+                    <div class="text-center"> <a href="{{route('forget.Password')}}">Mot de passe oublié ?</a></div>
                 </div>
             </form>
         </div>

@@ -14,7 +14,7 @@ class ExamenController extends Controller
          */
         public function index()
         {
-            return view('admin.examens.index',['examens'=>Examen::all()]);
+            return view('admin.examens.index',['examens'=>Examen::paginate(4)]);
         }
 
         /**

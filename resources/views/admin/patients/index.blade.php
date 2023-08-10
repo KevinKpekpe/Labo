@@ -63,6 +63,7 @@
                     </tbody>
                 </table>
             </div>
+            {{$patients->links()}}
         </div>
     </section>
 @endsection

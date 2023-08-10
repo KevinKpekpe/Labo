@@ -52,6 +52,10 @@
                     </tbody>
                 </table>
             </div>
+            {{$examens->links()}}
+        </div>
+        <div>
+
         </div>
     </section>
 @endsection

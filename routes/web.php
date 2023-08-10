@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ExamenController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\SecretaireController as AdminSecretaireController;
 use App\Http\Controllers\Auth\AuthConroller;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\DocteurController;
 use App\Http\Controllers\SecretaireController;
 use App\Models\User;
@@ -63,6 +64,7 @@ Route::prefix('docteur')->name('docteur.')->middleware(['auth', 'roleControl'])-
     Route::get('/', [DocteurController::class, 'index'])->name('home');
 });
 
-Route::get('/forgotPassword',function(){
-    return view ('auth.forgot-password');
-})->name('forgotPassword');
+Route::get('/forgotPassword',[ForgotPasswordController::class,'forgotPassword'])->name('forget.Password');
+Route::post('/forgotPassword',[ForgotPasswordController::class,'forgotPasswordPost'])->name('forget.Password.post');
+Route::get('/reset-password/{token}',[ForgotPasswordController::class,'resetPassword'])->name('reset.password');
+Route::post('/reset-password',[ForgotPasswordController::class,'resetPasswordPost'])->name('reset.password.post');
