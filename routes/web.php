@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SecretaireController as AdminSecretaireController
 use App\Http\Controllers\Auth\AuthConroller;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\DocteurController;
+use App\Http\Controllers\GenerateFiche;
 use App\Http\Controllers\SecretaireController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -25,24 +26,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // User::create([
-    //     'name' => 'Jennifer',
-    //     'postnom'=> 'Smith',
-    //     'matricule'=> 'MA00213',
-    //     'prenom' => 'Mary',
-    //     'sexe'=>'F',
-    //     'adresse' => 'Rue de la cadena n° 145, Paris',
-    //     'telephone' => '0827786347',
-    //     'role'=>'admin',
-    //     'date_de_naissance' => now(),
-    //     'email' => 'admin@example.com',
-    //     'password' => bcrypt('123456')
-    // ]);
-    // dd('Success');
-    return view('welcome');
-})->name('home');
-
+// Route::get('/', function () {
+//     // User::create([
+//     //     'name' => 'Jennifer',
+//     //     'postnom'=> 'Smith',
+//     //     'matricule'=> 'MA00213',
+//     //     'prenom' => 'Mary',
+//     //     'sexe'=>'F',
+//     //     'adresse' => 'Rue de la cadena n° 145, Paris',
+//     //     'telephone' => '0827786347',
+//     //     'role'=>'admin',
+//     //     'date_de_naissance' => now(),
+//     //     'email' => 'admin@example.com',
+//     //     'password' => bcrypt('123456')
+//     // ]);
+//     // dd('Success');
+//     return view('welcome');
+// })->name('home');
+Route::get('/',function(){
+    return 'welcome';
+})->middleware('auth');
 Route::get('/login',[AuthConroller::class,'login'])->name('login')->middleware('guest');
 Route::post('/login',[AuthConroller::class,'dologin'])->middleware('guest');
 Route::get('/logout',[AuthConroller::class,'logout'])->name('logout')->middleware('auth');
@@ -62,9 +65,14 @@ Route::prefix('secretaire')->name('secretaire.')->middleware(['auth', 'roleContr
 });
 Route::prefix('docteur')->name('docteur.')->middleware(['auth', 'roleControl'])->group(function () {
     Route::get('/', [DocteurController::class, 'index'])->name('home');
+    Route::get('/{id}', [DocteurController::class, 'show'])->name('show.detail');
 });
 
 Route::get('/forgotPassword',[ForgotPasswordController::class,'forgotPassword'])->name('forget.Password');
 Route::post('/forgotPassword',[ForgotPasswordController::class,'forgotPasswordPost'])->name('forget.Password.post');
 Route::get('/reset-password/{token}',[ForgotPasswordController::class,'resetPassword'])->name('reset.password');
 Route::post('/reset-password',[ForgotPasswordController::class,'resetPasswordPost'])->name('reset.password.post');
+
+// PDF
+
+Route::get('/pdf/{id}',[GenerateFiche::class,'createPDF'])->name('createPDF');

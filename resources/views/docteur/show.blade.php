@@ -1,10 +1,10 @@
-@extends('admin.base')
+@extends('base')
 @section('content')
     <section class="content patients">
         <div class="container-fluid">
             <h2>Informations générales</h2>
             <dl class="row">
-                @php
+            @php
                 $dateAnniversaire = \Carbon\Carbon::parse($bonlabo->patient->date_anniversaire);
                 $dateCreation = \Carbon\Carbon::parse($bonlabo->date_prescription );
                 $age = $dateCreation->diffInYears($dateAnniversaire);
@@ -14,8 +14,7 @@
                     :{{ $age }} <br> Sexe : {{ $bonlabo->patient->sexe }} </dd>
 
                 <dt class="col-sm-2">Médecin</dt>
-                <dd class="col-sm-10">{{ $bonlabo->docteur->user->name ?? 'Patient Ambulatoire' }}
-                    {{ $bonlabo->docteur->user->prenom ?? '' }}</dd>
+                <dd class="col-sm-10">{{Auth::user()->name}}</dd>
 
                 <dt class="col-sm-2">Date de bonlabo</dt>
                 <dd class="col-sm-10">{{ $bonlabo->date_prescription }}</dd>
@@ -40,17 +39,6 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="{{ route('admin.bonlabo-details.edit', ['bonlaboId' => $bonlabo->id]) }}"
-                class="btn btn-warning">Resultat</a>
-            <a href="{{ route('admin.bonlabos.edit', ['bonlabo' => $bonlabo->id]) }}" class="btn btn-primary">Modifier</a>
-            {{-- <a href="{{ route('bonlabo-details.edit', ['bonlaboId' => $bonlabo->id]) }}" class="btn btn-warning">Modifier résultats</a> --}}
-            <form action="{{ route('admin.bonlabos.destroy', ['bonlabo' => $bonlabo->id]) }}" method="POST"
-                style="display: inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Supprimer</button>
-            </form>
-            <a href="{{route('createPDF',$bonlabo->id)}}" class="btn btn-dark">Imprimer</a>
         </div>
         </div>
     </section>

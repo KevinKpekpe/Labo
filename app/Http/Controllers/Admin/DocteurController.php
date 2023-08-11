@@ -8,6 +8,7 @@ use App\Http\Requests\UserFormRequest;
 use App\Models\Docteur;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class DocteurController extends Controller
@@ -46,6 +47,7 @@ class DocteurController extends Controller
             'user_id' => $user->id,
             'specialite' => $request->input('specialite'),
         ]);
+        Mail::send();
         return redirect()->route('admin.docteurs.index')->with('success','Insertion Successfully');
     }
     public function edit(User $docteur)
