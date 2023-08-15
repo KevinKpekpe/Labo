@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\SecretaireController as AdminSecretaireController;
 use App\Http\Controllers\Auth\AuthConroller;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\PasswordFirstController;
 use App\Http\Controllers\DocteurController;
 use App\Http\Controllers\GenerateFiche;
 use App\Http\Controllers\SecretaireController;
@@ -60,10 +61,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'roleControl'])->gro
     Route::get('bonlabos/{bonlaboId}/results', [BonLaboDetailsController::class, 'edit'])->name('bonlabo-details.edit');
     Route::post('bonlabos/{bonlaboId}/update-results', [BonLaboDetailsController::class, 'update'])->name('bonlabo-details.update');
 });
-Route::prefix('secretaire')->name('secretaire.')->middleware(['auth', 'roleControl'])->group(function () {
+Route::prefix('secretaire')->name('secretaire.')->middleware(['auth', 'roleControl','checkPasswordChange'])->group(function () {
     Route::get('/', [SecretaireController::class, 'index'])->name('home');
 });
-Route::prefix('docteur')->name('docteur.')->middleware(['auth', 'roleControl'])->group(function () {
+Route::prefix('docteur')->name('docteur.')->middleware(['auth', 'roleControl','checkPasswordChange'])->group(function () {
     Route::get('/', [DocteurController::class, 'index'])->name('home');
     Route::get('/{id}', [DocteurController::class, 'show'])->name('show.detail');
 });
@@ -76,3 +77,6 @@ Route::post('/reset-password',[ForgotPasswordController::class,'resetPasswordPos
 // PDF
 
 Route::get('/pdf/{id}',[GenerateFiche::class,'createPDF'])->name('createPDF');
+
+Route::get('/password/change', [PasswordFirstController::class, 'showChangeForm'])->name('password.change');
+Route::post('/password/update', [PasswordFirstController::class, 'update'])->name('password.update');

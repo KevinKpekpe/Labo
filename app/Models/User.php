@@ -29,6 +29,7 @@ class User extends Authenticatable
         'adresse',
         'email',
         'password',
+        'password_changed_at',
     ];
 
     /**
@@ -49,6 +50,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+    ];
+    protected $dates = [
+        'password_changed_at',
     ];
     public function docteur()
     {

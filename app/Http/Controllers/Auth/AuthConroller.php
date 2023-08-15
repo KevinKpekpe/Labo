@@ -15,14 +15,18 @@ class AuthConroller extends Controller
         //dd($request->email);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)){
-            if(auth()->user()->role == 'admin'){
-                return redirect()->route('admin.home');
-            }
-            if(auth()->user()->role == 'docteur'){
-                return redirect()->route('docteur.home');
-            }
-            if(auth()->user()->role == 'secretaire'){
-                return redirect()->route('secretaire.home');
+            if (auth()->user()->password_changed_at === null) {
+                return redirect()->route('password.change');
+            }else{
+                if(auth()->user()->role == 'admin'){
+                    return redirect()->route('admin.home');
+                }
+                if(auth()->user()->role == 'docteur'){
+                    return redirect()->route('docteur.home');
+                }
+                if(auth()->user()->role == 'secretaire'){
+                    return redirect()->route('secretaire.home');
+                }
             }
         }else {
             return redirect()->back()->withInput()->withErrors(['email' => 'Invalid credentials']);

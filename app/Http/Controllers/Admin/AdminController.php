@@ -18,17 +18,18 @@ class AdminController extends Controller
         $patientsCount = Patient::count();
         $examCount = Examen::count();
         $bonDetailsCount = BonDetails::whereDate('date', $today)->count();
+        // Récupérer les données de la base de données
         $data = DB::table('bon_details')
             ->join('examens', 'bon_details.examen_id', '=', 'examens.id')
-            ->select(DB::raw('MONTH(bon_Details.date) AS month'), 'examens.description', DB::raw('COUNT(*) AS total'))
+            ->select(DB::raw('MONTH(bon_details.date) AS month'), 'examens.description', DB::raw('COUNT(*) AS total'))
             ->groupBy('month', 'examens.description')
             ->orderBy('month')
             ->get();
 
+        // Préparer les données pour le graphique
         $chartData = [];
         $examNames = [];
 
-        // Préparer les données pour le graphique
         foreach ($data as $row) {
             $month = \DateTime::createFromFormat('!m', $row->month)->format('F');
             $examName = $row->description;
@@ -44,7 +45,28 @@ class AdminController extends Controller
 
             $chartData[$month][$examName] = $total;
         }
-        //dd($chartData);
-        return view('admin.index', ['patientsCount' => $patientsCount, 'examCount' => $examCount, 'bonDetailsCount' => $bonDetailsCount, 'chartData' => $chartData,'examNames'=>$examNames]);
+
+        // Préparer les données pour Chart.js
+        $chartLabels = array_keys($chartData);
+        $datasets = [];
+
+        foreach ($examNames as $examName) {
+            $data = [];
+            foreach ($chartData as $monthData) {
+                $data[] = isset($monthData[$examName]) ? $monthData[$examName] : 0;
+            }
+
+            $datasets[] = [
+                'label' => $examName,
+                'data' => $data,
+                'backgroundColor' => 'rgba(0, 18, 212, 0.3)',
+                'borderColor' => 'rgba(0, 188, 212, 0.75)',
+                'pointBorderColor' => 'rgba(0, 188, 212, 0)',
+                'pointBackgroundColor' => 'rgba(0, 188, 212, 0.9)',
+                'pointBorderWidth' => 1,
+            ];
+        }
+
+        return view('admin.index', ['chartLabels' => $chartLabels, 'datasets'=> $datasets,'patientsCount' => $patientsCount, 'examCount' => $examCount, 'bonDetailsCount' => $bonDetailsCount, 'chartData' => $chartData,'examNames'=>$examNames]);
     }
 }
