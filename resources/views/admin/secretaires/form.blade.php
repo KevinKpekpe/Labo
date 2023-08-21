@@ -25,6 +25,10 @@
                                     </ul>
                                 </div>
                             @endif
+
+                            @if (session()->has('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
                             <div class="body">
                                 <div class="row clearfix">
                                     <div class="col-lg-4 col-sm-12">

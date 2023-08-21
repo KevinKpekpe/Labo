@@ -37,8 +37,8 @@
                     <li class="active open"><a href="{{ route('secretaire.home') }}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
                         <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-account-o"></i><span>Gestion des Patients</span> </a>
                             <ul class="ml-menu">
-                                <li><a href="">Tous Les Patients</a></li>
-                                <li><a href="">Ajouter un Examen</a></li>
+                                <li><a href="{{route('secretaire.patients.index')}}">Tous Les Patients</a></li>
+                                <li><a href="{{route('secretaire.patients.create')}}">Ajouter un Patienr</a></li>
                             </ul>
                         </li>
                 @endif
