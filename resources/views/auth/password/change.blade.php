@@ -52,7 +52,6 @@
                     <div class="text-center">
                         <input type="submit" class="btn btn-raised waves-effect g-bg-cyan" value="Connexion">
                     </div>
-                    <div class="text-center"> <a href="{{route('forget.Password')}}">Mot de passe oublié ?</a></div>
                 </div>
             </form>
         </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BonLaboController;
 use App\Http\Controllers\Admin\BonLaboDetailsController;
 use App\Http\Controllers\Admin\DocteurController as AdminDocteurController;
 use App\Http\Controllers\Admin\ExamenController;
+use App\Http\Controllers\Admin\FactureController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\SecretaireController as AdminSecretaireController;
 use App\Http\Controllers\Auth\AuthConroller;
@@ -58,6 +59,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'roleControl'])->gro
     Route::resource('secretaires',AdminSecretaireController::class);
     Route::resource('docteurs',AdminDocteurController::class);
     Route::resource('bonlabos',BonLaboController::class);
+    Route::resource('factures',FactureController::class);
     Route::get('bonlabos/{bonlaboId}/results', [BonLaboDetailsController::class, 'edit'])->name('bonlabo-details.edit');
     Route::post('bonlabos/{bonlaboId}/update-results', [BonLaboDetailsController::class, 'update'])->name('bonlabo-details.update');
 });

@@ -65,6 +65,12 @@
                         <li><a href="{{route('admin.bonlabos.create')}}">Ajouter un Bon</a></li>
                     </ul>
                 </li>
+                <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-assignment"></i><span>Gestion des Factures</span> </a>
+                    <ul class="ml-menu">
+                        <li><a href="{{route('admin.factures.index')}}">Afficher Toutes les Factures</a></li>
+                        <li><a href="{{route('admin.factures.create')}}">Ajouter une Facture</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="{{route('logout')}}" class="menu-toggle"><i class="zmdi zmdi zmdi-power"></i><span>Deconnexion</span> </a>
                 </li>

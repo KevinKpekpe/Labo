@@ -39,8 +39,8 @@
                 <div class="info-box-4 hover-zoom-effect">
                     <div class="icon"> <i class="zmdi zmdi-balance col-cyan"></i> </div>
                     <div class="content">
-                        <div class="text">Bénefice hopitale</div>
-                        <div class="number">$3,540</div>
+                        <div class="text">Bénefice du Laboratoire</div>
+                        <div class="number">{{$amount}}Fc</div>
                     </div>
                 </div>
             </div>

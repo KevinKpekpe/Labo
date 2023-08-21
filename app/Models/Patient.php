@@ -13,4 +13,7 @@ class Patient extends Model
     {
         return $this->hasMany(BonLabo::class);
     }
+    public function factures(){
+        return $this->hasMany(Facture::class);
+    }
 }

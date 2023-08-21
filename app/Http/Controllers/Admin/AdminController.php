@@ -17,6 +17,10 @@ class AdminController extends Controller
         $today = Carbon::now()->toDateString();
         $patientsCount = Patient::count();
         $examCount = Examen::count();
+
+        $amount = DB::table('factures')
+        ->select(DB::raw('SUM(CAST(montant AS DECIMAL(10, 2))) AS total'))
+        ->value('total');
         $bonDetailsCount = BonDetails::whereDate('date', $today)->count();
         // Récupérer les données de la base de données
         $data = DB::table('bon_details')
@@ -59,14 +63,23 @@ class AdminController extends Controller
             $datasets[] = [
                 'label' => $examName,
                 'data' => $data,
-                'backgroundColor' => 'rgba(0, 18, 212, 0.3)',
-                'borderColor' => 'rgba(0, 188, 212, 0.75)',
-                'pointBorderColor' => 'rgba(0, 188, 212, 0)',
-                'pointBackgroundColor' => 'rgba(0, 188, 212, 0.9)',
-                'pointBorderWidth' => 1,
+                'backgroundColor' => 'rgba(255, 0, 0, 0.3)',
+                'borderColor' => 'rgba(255, 0, 0, 0.75)',
+                'pointBorderColor' => 'rgba(255, 0, 0, 0)',
+                'pointBackgroundColor' => 'rgba(255, 0, 0, 0.9)',
+                
             ];
         }
 
-        return view('admin.index', ['chartLabels' => $chartLabels, 'datasets'=> $datasets,'patientsCount' => $patientsCount, 'examCount' => $examCount, 'bonDetailsCount' => $bonDetailsCount, 'chartData' => $chartData,'examNames'=>$examNames]);
+        return view('admin.index', [
+            'chartLabels' => $chartLabels,
+            'datasets'=> $datasets,
+            'patientsCount' => $patientsCount,
+            'examCount' => $examCount,
+            'bonDetailsCount' => $bonDetailsCount,
+            'chartData' => $chartData,
+            'examNames'=>$examNames,
+            'amount' => $amount,
+        ]);
     }
 }
