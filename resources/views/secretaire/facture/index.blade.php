@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base')
 @section('content')
     <section class="content patients">
         <div class="container-fluid">
@@ -13,7 +13,7 @@
             @endif
 
             <div class="row clearfix">
-                <a href="{{ route('admin.factures.create') }}" class="btn btn-success mb-2">Enregistrer une facture</a>
+                <a href="{{ route('secretaire.factures.create') }}" class="btn btn-success mb-2">Enregistrer une facture</a>
                 <table class="table  table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -35,9 +35,9 @@
                                 <td scope="row">{{ $facture->numero_facture}}</td>
                                 <td scope="row">{{ $facture->montant}}</td>
                                 <td>
-                                    <a href="{{ route('admin.factures.edit', ['facture' => $facture->id]) }}"
+                                    <a href="{{ route('secretaire.factures.edit', ['facture' => $facture->id]) }}"
                                         class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('admin.factures.destroy', ['facture' => $facture->id]) }}"
+                                    <form action="{{ route('secretaire.factures.destroy', ['facture' => $facture->id]) }}"
                                         style="display: inline" method="POST">
                                         @csrf
                                         @method('DELETE')

@@ -13,6 +13,9 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\PasswordFirstController;
 use App\Http\Controllers\DocteurController;
 use App\Http\Controllers\GenerateFiche;
+use App\Http\Controllers\Secretaire\BonLaboController as SecretaireBonLaboController;
+use App\Http\Controllers\Secretaire\BonLaboDetailsController as SecretaireBonLaboDetailsController;
+use App\Http\Controllers\Secretaire\FactureController as SecretaireFactureController;
 use App\Http\Controllers\Secretaire\PatientController as SecretairePatientController;
 use App\Http\Controllers\Secretaire\SecretaireController as SecretaireSecretaireController;
 use App\Http\Controllers\SecretaireController;
@@ -68,6 +71,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'roleControl'])->gro
 Route::prefix('secretaire')->name('secretaire.')->middleware(['auth', 'roleControl','checkPasswordChange'])->group(function () {
     Route::get('/', [SecretaireSecretaireController::class, 'index'])->name('home');
     Route::resource('patients',SecretairePatientController::class);
+    Route::resource('bonlabos',SecretaireBonLaboController::class);
+    Route::resource('factures',SecretaireFactureController::class);
+    Route::get('bonlabos/{bonlaboId}/results', [SecretaireBonLaboDetailsController::class, 'edit'])->name('bonlabo-details.edit');
+    Route::post('bonlabos/{bonlaboId}/update-results', [SecretaireBonLaboDetailsController::class, 'update'])->name('bonlabo-details.update');
 });
 Route::prefix('docteur')->name('docteur.')->middleware(['auth', 'roleControl','checkPasswordChange'])->group(function () {
     Route::get('/', [DocteurController::class, 'index'])->name('home');

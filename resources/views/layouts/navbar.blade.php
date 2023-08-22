@@ -6,7 +6,6 @@
     </div>
 </nav>
 <section>
-
     <aside id="leftsidebar" class="sidebar">
 
         <div class="user-info">
@@ -39,6 +38,18 @@
                             <ul class="ml-menu">
                                 <li><a href="{{route('secretaire.patients.index')}}">Tous Les Patients</a></li>
                                 <li><a href="{{route('secretaire.patients.create')}}">Ajouter un Patienr</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-assignment"></i><span>Gestion des Bons</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="{{route('secretaire.bonlabos.index')}}">Afficher Tous les Bons</a></li>
+                                <li><a href="{{route('secretaire.bonlabos.create')}}">Ajouter un Bon</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-assignment"></i><span>Gestion des Factures</span> </a>
+                            <ul class="ml-menu">
+                                <li><a href="{{route('secretaire.factures.index')}}">Afficher Toutes les Factures</a></li>
+                                <li><a href="{{route('secretaire.factures.create')}}">Ajouter une Facture</a></li>
                             </ul>
                         </li>
                 @endif

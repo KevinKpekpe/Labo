@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base')
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -13,7 +13,7 @@
                             <h2>Information basic<small>Remplissez le formulaire ci-dessous...</small> </h2>
 
                         </div>
-                        <form method="POST" action="{{ route($facture->exists ? 'admin.factures.update' : 'admin.factures.store', $facture) }}" class="needs-validation" novalidate>
+                        <form method="POST" action="{{ route($facture->exists ? 'secretaire.factures.update' : 'secretaire.factures.store', $facture) }}" class="needs-validation" novalidate>
                             @csrf
                             @method($facture->exists ? 'put' : 'post')
                             @if ($errors->any())

@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base')
 @section('content')
     <section class="content patients">
         <div class="container-fluid">
@@ -40,11 +40,11 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="{{ route('admin.bonlabo-details.edit', ['bonlaboId' => $bonlabo->id]) }}"
+            <a href="{{ route('secretaire.bonlabo-details.edit', ['bonlaboId' => $bonlabo->id]) }}"
                 class="btn btn-warning">Resultat</a>
-            <a href="{{ route('admin.bonlabos.edit', ['bonlabo' => $bonlabo->id]) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ route('secretaire.bonlabos.edit', ['bonlabo' => $bonlabo->id]) }}" class="btn btn-primary">Modifier</a>
             {{-- <a href="{{ route('bonlabo-details.edit', ['bonlaboId' => $bonlabo->id]) }}" class="btn btn-warning">Modifier résultats</a> --}}
-            <form action="{{ route('admin.bonlabos.destroy', ['bonlabo' => $bonlabo->id]) }}" method="POST"
+            <form action="{{ route('secretaire.bonlabos.destroy', ['bonlabo' => $bonlabo->id]) }}" method="POST"
                 style="display: inline-block;">
                 @csrf
                 @method('DELETE')

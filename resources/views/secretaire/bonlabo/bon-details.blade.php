@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base')
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -13,7 +13,7 @@
                             <h2>Information basic<small>Remplissez le formulaire ci-dessous...</small> </h2>
 
                         </div>
-                        <form method="POST" action="{{ route('admin.bonlabo-details.update', $bonlaboId) }}"
+                        <form method="POST" action="{{ route('secretaire.bonlabo-details.update', $bonlaboId) }}"
                             class="needs-validation" novalidate>
                             @csrf
                             @if ($errors->any())
